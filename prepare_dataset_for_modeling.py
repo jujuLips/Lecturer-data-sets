@@ -10,7 +10,11 @@ from sklearn import preprocessing
 from sklearn.utils import shuffle
 
 
-def prepare_dataset_for_modeling(dataset_name, n_ins=-1, random_state=999, drop_const_columns=True, is_classification=True):
+def prepare_dataset_for_modeling(dataset_name,
+                                 n_ins=-1,
+                                 random_state=999,
+                                 drop_const_columns=True,
+                                 is_classification=True):
     """
     :param dataset_name: name of dataset to be read from github
     :param n_ins: how many instances to sample (if > 0)
@@ -39,9 +43,9 @@ def prepare_dataset_for_modeling(dataset_name, n_ins=-1, random_state=999, drop_
     # apparently not all unique-value columns are ID columns!
     # ### df = df.loc[:, df.nunique() < df.shape[0]]
     
-   if drop_const_columns:
-        # drop constant columns
-        df = df.loc[:, df.nunique() > 1]
+    if drop_const_columns:
+       # drop constant columns
+       df = df.loc[:, df.nunique() > 1]
 
     # last column is y (target feature)
     y = df.iloc[:, -1]
@@ -67,7 +71,7 @@ def prepare_dataset_for_modeling(dataset_name, n_ins=-1, random_state=999, drop_
     x = preprocessing.MinMaxScaler().fit_transform(x)
 
     if is_classification:
-            # label-encode y for classification problems
+        # label-encode y for classification problems
         y = preprocessing.LabelEncoder().fit_transform(y)
 
     # shuffle dataset at the end
@@ -78,3 +82,4 @@ def prepare_dataset_for_modeling(dataset_name, n_ins=-1, random_state=999, drop_
 
 # ## how to run this script
 x, y = prepare_dataset_for_modeling('us_census_income_data.csv')
+
