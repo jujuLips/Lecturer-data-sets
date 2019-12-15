@@ -29,7 +29,7 @@ def prepare_dataset_for_modeling(dataset_name,
             getattr(ssl, '_create_unverified_context', None)):
         ssl._create_default_https_context = ssl._create_unverified_context
     github_location = 'https://raw.githubusercontent.com/vaksakalli/datasets/master/'
-    dataset_url = github_location + dataset_name
+    dataset_url = github_location + dataset_name.lower()
     df = pd.read_csv(io.StringIO(requests.get(dataset_url).content.decode('utf-8')), header=0)
 
     # drop missing values if there are any
@@ -81,5 +81,5 @@ def prepare_dataset_for_modeling(dataset_name,
 
 
 # ## how to run this script
-x, y = prepare_dataset_for_modeling('us_census_income_data.csv')
+# x, y = prepare_dataset_for_modeling('us_census_income_data.csv')
 
